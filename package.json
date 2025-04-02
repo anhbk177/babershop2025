@@ -1,0 +1,45 @@
+{
+  "name": "babershop",
+  "version": "1.0.0",
+  "description": "backend web babershop2025",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node ./src/server.js",
+    "start": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anhbk177/babershop2025.git"
+  },
+  "keywords": [
+    "fullstack",
+    "nodejs",
+    "express"
+  ],
+  "author": "Hoang Anh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anhbk177/babershop2025/issues"
+  },
+  "homepage": "https://github.com/anhbk177/babershop2025#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.9",
+    "express": "^4.17.1",
+    "mysql2": "^3.14.0",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.6.2"
+  }
+}
