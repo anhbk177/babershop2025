@@ -3,22 +3,24 @@ import express from "express";
 import bodyParser from "body-parser";
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./route/web";
+import connectDB from "./config/connectDB";
 
-// const { connection } = require("./config/database"); // Import connection
 // const { getHomepage } = require("./controllers/homeController");
 // const cors = require("cors");
-
 let app = express();
-let port = process.env.PORT || 8888;
 
-//config app
-//config cors
+// Cấu hình body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cors());
-
+// Cấu hình view engine và routes
 viewEngine(app);
 initWebRoutes(app);
+
+// database
+connectDB();
+
+let port = process.env.PORT || 8888;
 
 app.listen(port, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${port}`);

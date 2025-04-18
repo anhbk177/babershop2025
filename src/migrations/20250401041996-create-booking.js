@@ -1,17 +1,19 @@
 "use strict";
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Bookings", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("bookings", {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
       },
       customer_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: "Customers",
+          model: "users", // Tên bảng phải đúng
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -19,18 +21,21 @@ module.exports = {
       },
       employee_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
-          model: "Employees",
+          model: "users",
           key: "id",
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "SET NULL",
       },
       appointment_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
+        allowNull: false,
       },
       appointment_time: {
         type: Sequelize.TIME,
+        allowNull: false,
       },
       status: {
         type: Sequelize.ENUM(
@@ -45,24 +50,29 @@ module.exports = {
         defaultValue: "pending",
       },
       total_price: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(10, 2),
+        defaultValue: 0.0,
       },
       notes: {
         type: Sequelize.TEXT,
+        allowNull: true,
       },
-      createdAt: {
-        allowNull: false,
+      created_at: {
         type: Sequelize.DATE,
+        allowNull: true,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updatedAt: {
-        allowNull: false,
+      updated_at: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        allowNull: true,
+        defaultValue: Sequelize.literal(
+          "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        ),
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Bookings");
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("bookings");
   },
 };
