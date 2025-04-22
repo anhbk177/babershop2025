@@ -6,13 +6,19 @@ import initWebRoutes from "./route/web";
 import connectDB from "./config/connectDB";
 
 // const { getHomepage } = require("./controllers/homeController");
-// const cors = require("cors");
+const cors = require("cors");
 let app = express();
 
 // Cấu hình body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // frontend port
+    credentials: true, // cho phép gửi cookies nếu cần
+  })
+);
+
 // Cấu hình view engine và routes
 viewEngine(app);
 initWebRoutes(app);
